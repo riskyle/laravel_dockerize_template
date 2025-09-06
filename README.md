@@ -6,7 +6,7 @@ A ready-to-use Laravel development template with Docker, PostgreSQL, and Nginx. 
 
 ## 🚀 Features
 
--   **Laravel 11** - Latest version of the Laravel framework
+-   **Laravel 12** - Latest version of the Laravel framework
 -   **Docker & Docker Compose** - Containerized development environment
 -   **PostgreSQL 17** - Modern, powerful database with Alpine Linux
 -   **Nginx** - High-performance web server and reverse proxy
