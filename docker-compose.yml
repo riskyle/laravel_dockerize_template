@@ -28,7 +28,7 @@ services:
       - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     ports:
-      - "${FORWARD_NGINX_PORT:-80}:80"
+      - "${FORWARD_NGINX_PORT:-9001}:80"
       - "${FORWARD_NGINX_SSL_PORT:-443}:443"
     networks:
       - app-network
@@ -40,10 +40,10 @@ services:
     ports:
         - '${FORWARD_DB_PORT:-5432}:5432'
     environment:
-        PGPASSWORD: '${DB_PASSWORD}'
+        PGPASSWORD: '${DB_PASSWORD:-password}'
         POSTGRES_DB: '${DB_DATABASE}'
-        POSTGRES_USER: '${DB_USERNAME}'
-        POSTGRES_PASSWORD: '${DB_PASSWORD}'
+        POSTGRES_USER: '${DB_USERNAME:-root}'
+        POSTGRES_PASSWORD: '${DB_PASSWORD:-password}'
     volumes:
         - 'pgsql-data:/var/lib/postgresql/data'
         - './docker-data/init/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
@@ -65,8 +65,8 @@ services:
   pgadmin:
     image: dpage/pgadmin4:latest
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_EMAIL: '${PGADMIN_DEFAULT_EMAIL}'
+      PGADMIN_DEFAULT_PASSWORD: '${PGADMIN_DEFAULT_PASSWORD}'
     ports:
       - "${FORWARD_PGADMIN_PORT:-8080}:80"
     volumes:
